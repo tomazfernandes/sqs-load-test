@@ -1,0 +1,30 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.3'
+    id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+    id 'java'
+}
+
+
+
+group = 'io.awspring.cloud.sqs'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'io.awspring.cloud:spring-cloud-aws-starter-sqs:3.0.0-SNAPSHOT'
+    implementation 'software.amazon.awssdk:dynamodb:2.17.264'
+    implementation 'software.amazon.awssdk:netty-nio-client:2.17.263'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
