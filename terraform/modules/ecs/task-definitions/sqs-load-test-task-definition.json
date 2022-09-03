@@ -1,0 +1,21 @@
+[
+  {
+    "name": "sqs-load-test-task",
+    "image": "${ecr_image}",
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort": 8080,
+        "hostPort": 8080
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "sqs-load-test-log-group",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "ecs"
+      }
+    }
+  }
+]

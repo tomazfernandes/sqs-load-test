@@ -4,20 +4,18 @@ plugins {
     id 'java'
 }
 
-
-
 group = 'io.awspring.cloud.sqs'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 repositories {
     mavenCentral()
-    mavenLocal()
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'io.awspring.cloud:spring-cloud-aws-starter-sqs:3.0.0-SNAPSHOT'
+    implementation 'io.awspring.cloud:spring-cloud-aws-starter-sqs:3.0.0-M2'
+    implementation 'io.awspring.cloud:spring-cloud-aws-starter'
     implementation 'software.amazon.awssdk:dynamodb:2.17.264'
     implementation 'software.amazon.awssdk:netty-nio-client:2.17.263'
     implementation 'org.springframework.boot:spring-boot-starter-validation'

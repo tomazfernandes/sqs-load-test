@@ -1,0 +1,29 @@
+name: "Deploy to AWS"
+description: "Deploys to AWS"
+outputs:
+  ecr-image:
+    description: "ECR Image"
+    value: ${{ steps.build-image.outputs.ecr-image }}
+runs:
+  using: "composite"
+  steps:
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+    - name: Build, tag, and push image to Amazon ECR
+      shell: bash
+      id: build-image
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: sqs-load-test-ecr-repo
+        IMAGE_NAME: sqs-load-test
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker build . --tag $IMAGE_NAME:latest --tag $IMAGE_NAME:$IMAGE_TAG
+        docker tag $IMAGE_NAME:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        echo "::set-output name=ecr-image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+    - name: "Output image name"
+      shell: bash
+      run: |
+        echo "Image name: ${{ steps.build-image.outputs.ecr-image }}"

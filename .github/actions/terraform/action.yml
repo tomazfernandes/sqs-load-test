@@ -1,0 +1,42 @@
+name: "Terraform Action"
+description: "Action for Terraform"
+inputs:
+  ecr-image:
+    description: 'ECR Image'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: "Setup Terraform"
+      uses: hashicorp/setup-terraform@v2
+    - name: Image name
+      run: echo ${{ inputs.ecr-image }}
+      shell: bash
+    - name: Terraform Format
+      id: fmt
+      run: terraform fmt -check
+      shell: bash
+    - name: "Terraform init"
+      shell: bash
+      run: terraform init -no-color
+      working-directory: ./terraform
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate -no-color
+      shell: bash
+    - name: Terraform Plan
+      working-directory: ./terraform
+      id: plan
+      run: terraform plan -detailed-exitcode -no-color -var="ecr_image=${{ inputs.ecr-image }}" || true
+      shell: bash
+    - run: echo ${{ steps.terraform-plan.outputs.stdout }}
+      shell: bash
+    - run: echo ${{ steps.terraform-plan.outputs.stderr }}
+      shell: bash
+    - run: echo ${{ steps.terraform-plan.outputs.exitcode }}
+      shell: bash
+    - name: "Terraform apply"
+      id: terraform-apply
+      shell: bash
+      working-directory: ./terraform
+      run: terraform apply -auto-approve -var="ecr_image=${{ inputs.ecr-image }}"
