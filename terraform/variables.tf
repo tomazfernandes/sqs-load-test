@@ -1,11 +1,11 @@
 variable "task_cpu" {
   type = number
-  default = 512
+  default = 2048
 }
 
 variable "task_memory" {
   type = number
-  default = 1024
+  default = 4096
 }
 
 variable "ecr_image" {

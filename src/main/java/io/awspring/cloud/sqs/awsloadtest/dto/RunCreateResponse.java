@@ -1,21 +1,21 @@
 package io.awspring.cloud.sqs.awsloadtest.dto;
 
 import io.awspring.cloud.sqs.awsloadtest.model.Run;
-import io.awspring.cloud.sqs.awsloadtest.model.Queue;
-import io.awspring.cloud.sqs.awsloadtest.model.Result;
-import io.awspring.cloud.sqs.awsloadtest.model.Settings;
-import io.awspring.cloud.sqs.awsloadtest.model.Status;
-import org.springframework.lang.Nullable;
 
+import java.net.URI;
 import java.util.UUID;
 
 /**
+ * DTO for the create run response.
  * @author Tomaz Fernandes
  */
-public record RunCreateResponse(UUID id, Status status, Settings settings, @Nullable Result result,
-                                @Nullable Queue queueAttributes) {
+public record RunCreateResponse(UUID id, String status, SettingsResponse settings,
+                                 QueueResponse queueAttributes, URI runLocation) {
 
-    public static RunCreateResponse of(Run run) {
-        return new RunCreateResponse(run.id(), run.status(), run.settings(), run.result(), run.queueAttributes());
+    public static RunCreateResponse of(Run run, URI uri) {
+        return new RunCreateResponse(run.id(), run.status().toString(),
+                SettingsResponse.of(run.settings()),
+                QueueResponse.of(run.queue()),
+                uri);
     }
 }

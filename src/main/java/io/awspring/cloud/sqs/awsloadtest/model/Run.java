@@ -7,11 +7,17 @@ import java.util.UUID;
 /**
  * @author Tomaz Fernandes
  */
-public record Run(UUID id, Status status, Settings settings, @Nullable Result result,
-                  @Nullable Queue queueAttributes) {
+public record Run(UUID id, Status status, Settings settings, Queue queue, @Nullable Result result) {
 
-    public Run(UUID id, Integer totalMessages, Integer maxConcurrency) {
-        this(id, Status.CREATED, new Settings(totalMessages, maxConcurrency), null, null);
+    public Run(UUID id, Status status, Settings settings) {
+        this(id, status, settings, null, null);
     }
 
+    public Run(Run run, Status status) {
+        this(run, status,null);
+    }
+
+    public Run(Run run, Status status, Result result) {
+        this(run.id(), status, run.settings(), run.queue(), result);
+    }
 }

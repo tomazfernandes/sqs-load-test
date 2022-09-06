@@ -19,11 +19,12 @@ resource "aws_lb_target_group" "target_group" {
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = var.default_vpc_id
+  deregistration_delay = 30
   health_check {
     matcher = "200"
     path = "/sqs-load-test/actuator/health"
-    interval = 120
-    timeout = 60
+    interval = 40
+    timeout = 30
     healthy_threshold = 2
     unhealthy_threshold = 3
   }

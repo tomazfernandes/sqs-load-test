@@ -13,6 +13,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'io.awspring.cloud:spring-cloud-aws-starter-sqs:3.0.0-M2'
     implementation 'io.awspring.cloud:spring-cloud-aws-starter'

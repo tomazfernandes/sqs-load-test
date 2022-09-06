@@ -14,7 +14,7 @@ public enum Status {
     /**
      * Execution has been validated and will start
      */
-    STARTING,
+    STARTED,
 
     /**
      * Sending messages to the queue
@@ -35,6 +35,8 @@ public enum Status {
      * Execution completed with an error
      */
     COMPLETED_WITH_ERRORS,
+
+    CANCELLED,
 
     TIMED_OUT;
 

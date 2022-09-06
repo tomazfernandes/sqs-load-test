@@ -8,6 +8,7 @@ import java.time.Instant;
 /**
  * @author Tomaz Fernandes
  */
-public record Result(@Nullable Instant runStart, @Nullable Instant runEnd,
-                     String runDurationSeconds, String messagesPerSecond, @Nullable RunError runError) {
+public record Result(Instant runStart, Instant runEnd,
+                     BigDecimal runDurationSeconds, BigDecimal messagesPerSecond, @Nullable RunError runError) {
+
 }
