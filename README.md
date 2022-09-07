@@ -1,15 +1,16 @@
-## Load Test Application for Spring Cloud AWS SQS 
-This is a simple app to perform load tests with the new Spring Cloud AWS SQS integration.
-It currently supports only `Standard SQS` queues and runs are stored in-memory.
+## Simple Load Test Application for Spring Cloud AWS SQS 
+This is a simple application to perform load tests with the new `Spring Cloud AWS SQS` integration.
+This is not supposed to be an exhaustive testing suite, only to have some throughput estimation.
 
+It currently supports only `Standard SQS` queues and run results are stored in-memory.
 Further improvements include adding support for `FIFO` queues and persisting messages and results to `DynamoDB` tables.
 
 ## Results
 
 Results so far with a **single ECS instance** show up to:
 * **17K** messages / second with 4 vcpu and 8 GB memory
-* **8K+** messages / second with 2 vcpu and 4GB memory
-* **4K+** messages / second with 1 vcpu and 2GB memory
+* **8K** messages / second with 2 vcpu and 4GB memory
+* **4K** messages / second with 1 vcpu and 2GB memory
 
 Tests were made with up to **1 million messages** in a single standard SQS queue.
 
@@ -26,7 +27,7 @@ The test run consists of:
 
 ## Using the app
 
-`POST` **/sqs-load-test/v1/runs**
+`POST` /sqs-load-test/v1/runs
 
 ```json
 {
@@ -39,17 +40,17 @@ The test run consists of:
 }
 ```
 
-`GET` **/sqs-load-test/v1/runs**
+`GET` /sqs-load-test/v1/runs
 
-`GET` **/sqs-load-test/v1/runs/{id}**
+`GET` /sqs-load-test/v1/runs/{id}
 
-`DELETE` **/sqs-load-test/v1/runs/**
+`DELETE` /sqs-load-test/v1/runs/
 
-`DELETE` **/sqs-load-test/v1/runs/{id}**
+`DELETE` /sqs-load-test/v1/runs/{id}
 
 ## Infrastructure
 
-This application contains a simple `Terraform` IoC infrastructure to be deployed to `AWS ECS`, along with a `Github Actions` CI/CD pipeline.
+This application contains a simple `Terraform` infrastructure to be deployed to `AWS ECS`, along with a `Github Actions` CI/CD pipeline.
 
 ## Open API / Swagger
 
