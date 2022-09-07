@@ -1,4 +1,7 @@
 resource "aws_security_group" "service_security_group" {
+
+  vpc_id      = var.default_vpc_id
+
   ingress {
     from_port = 8080
     to_port = 8080
@@ -19,6 +22,9 @@ resource "aws_security_group" "service_security_group" {
 }
 
 resource "aws_security_group" "load_balancer_security_group" {
+
+  vpc_id      = var.default_vpc_id
+
   ingress {
     from_port   = 8080
     to_port     = 8080

@@ -42,3 +42,4 @@ out/
 *.hcl
 /terraform/.terraform.tfstate.lock.info
 /terraform/terraform.tfstate.backup
+/terraform/state/terraform.tfstate.backup

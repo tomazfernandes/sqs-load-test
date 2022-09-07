@@ -1,3 +1,12 @@
+provider "aws" {
+  region  = "us-east-1"
+  default_tags {
+    tags = {
+      Name         = "sqs-load-test-tag"
+    }
+  }
+}
+
 resource "aws_kms_key" "terraform_bucket_key" {
   description             = "Encrypt bucket objects"
   deletion_window_in_days = 10

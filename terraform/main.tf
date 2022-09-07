@@ -29,6 +29,7 @@ module "load_balancer" {
 
 module "security_group" {
   source = "./modules/security-group"
+  default_vpc_id = module.network.default_vpc_id
 }
 
 module "network" {
@@ -45,9 +46,4 @@ module "ecs" {
   task_cpu = var.task_cpu
   task_memory = var.task_memory
   ecr_image = var.ecr_image
-}
-
-module "state" {
-  source = "./modules/state"
-  state_bucket_name = "sqs-load-test-tf-state"
 }
