@@ -6,12 +6,12 @@ Further improvements include adding support for `FIFO` queues and persisting mes
 
 ## Results
 
-Results so far with a single ECS instance show up to:
+Results so far with a **single ECS instance** show up to:
 * **17K** messages / second with 4 vcpu and 8 GB memory
 * **8K+** messages / second with 2 vcpu and 4GB memory
 * **4K+** messages / second with 1 vcpu and 2GB memory
 
-Tests were made with up to 1 million messages in a single standard SQS queue.
+Tests were made with up to **1 million messages** in a single standard SQS queue.
 
 ## Test run
 
@@ -19,7 +19,8 @@ The test run consists of:
 * Create a standard SQS queue
 * Send messages to the queue with a small `String` payload
 * Create and start a `SqsMessageListenerContainer`
-* Wait for all messages to be consumed and acknowledged
+* Wait for all messages to be consumed
+* Wait for all messages to be acknowledged
 * Assert results
 * Delete the queue
 
